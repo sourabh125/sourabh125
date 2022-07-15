@@ -1,0 +1,61 @@
+
+// solution in O(n^2)
+
+class Solution {
+public:
+    int maxArea(vector<int>& height) {
+        
+        int size=height.size();
+        int maxWater=0;
+        int currentWater=0;
+        for(int i=0;i<size;i++)
+        {
+            for(int j=size-1;j>i;j--)
+            {
+                int start=height[i];
+                int end=height[j];
+                currentWater=abs(j-i)*min(end,start);
+                if(currentWater>maxWater)
+                {
+                    maxWater=currentWater;
+                }
+            }
+        }
+        return maxWater;
+    }
+};
+
+//********************************************************************************************************
+
+
+// solution in O(n)
+
+ // Container With Most Water
+ class Solution {
+public:
+    int maxArea(vector<int>& height) {
+        
+        int i=0;
+        int j=height.size()-1;
+        int maxWater=0;
+        int currentWater=0;
+        while(i<j)
+        {
+            currentWater=abs(i-j)*min(height[i],height[j]); 
+            if(currentWater>maxWater)
+            {
+                maxWater=currentWater;
+            }
+            if(height[i]>height[j])
+            {
+                j--;
+            }
+            else
+            {
+                i++;
+            }
+        }
+        return (int)maxWater;
+    }
+};
+
