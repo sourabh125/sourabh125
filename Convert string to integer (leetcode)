@@ -1,0 +1,69 @@
+class Solution {
+public:
+    int myAtoi(string s) {
+        
+        long int sum=0;
+        int flag=1;
+        int i=0;
+        while(s[i]==' ') i++;//skip leading whitespaces
+        if(s[i]=='-')
+        {
+            flag=-1;
+            i++;
+        }
+        else if(s[i]=='+')
+        {
+            flag=+1;
+            i++;
+        }
+        
+        while(i<s.length() && s[i]=='0')
+        {
+            i++;
+        }
+        int j=0;
+        while(i<s.length() && (s[i]>='0' && s[i]<='9'))
+        {
+            s[j++]=s[i++];
+            
+        }
+        s.resize(j);
+        if(s.length()>10)
+        {
+            if(flag==-1)
+            {
+                return INT_MIN;
+            }
+            else
+            {
+                return INT_MAX;
+            }
+        }
+        i=0;
+        while(i<s.length())
+        {
+            sum=sum*10+(s[i]-'0');
+            i++;
+        }
+        if(flag==-1)
+        {
+            if(sum>INT_MAX )
+            {
+                return INT_MIN;
+            }
+            else
+            {
+                return flag*sum;
+            }
+        }
+        else
+        {
+            if(sum>INT_MAX)
+            {
+                return INT_MAX;
+            }
+        }
+        
+        return int(sum*flag);
+    }
+};
