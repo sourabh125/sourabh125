@@ -1,0 +1,54 @@
+// solution in O(N^2)
+
+class Solution {
+public:
+    vector<vector<int>> twoSum(vector<int> nums,int idx)
+    {
+        vector<vector<int>> ans;
+        
+        int s=0;
+        int e=idx-1;
+        
+        while(s<e)
+        {
+            vector<int> ans1;
+            if(nums[s]+nums[e]==-nums[idx])
+            {
+                ans1.push_back(nums[s]);
+                ans1.push_back(nums[e]);
+                ans1.push_back(nums[idx]);
+                ans.push_back(ans1);
+                s++;
+                e--;
+              // while(s+1<idx && nums[s]==nums[s-1]) s++;
+              // while(e-1>=0 && nums[e]==nums[e+1]) e--;
+            }
+            else if(nums[s]+nums[e]<-nums[idx])
+            {
+                s++;
+            }
+            else
+            {
+                e--;
+            }
+        }
+        return ans;
+    }
+    vector<vector<int>> threeSum(vector<int>& nums) 
+    {
+        // radha swami ji
+        sort(nums.begin(),nums.end());
+        vector<vector<int>> res;
+        for(int i=nums.size()-1;i>=0;i--)
+        {
+            if(i!=nums.size()-1 && nums[i]==nums[i+1]) continue;
+            vector<vector<int>> lst=twoSum(nums,i);
+            //res.push_back(lst);
+            for(int i=0;i<lst.size();i++)
+            {
+                res.push_back(lst[i]);
+            }
+        }
+        return res;
+    }
+};
